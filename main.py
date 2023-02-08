@@ -109,6 +109,7 @@ elif flaps_pos == 4:
     lp.LedCtrlXY(6, 7, 0, 0, 0)
     lp.LedCtrlXY(6, 8, 64, 64, 64)
 
+
 #parking brake vars
 
 pb_pos = aq.get("BRAKE PARKING POSITION")
