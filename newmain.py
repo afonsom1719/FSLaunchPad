@@ -24,10 +24,6 @@ vr.clear_sim_variables()
 
 
 
-
-
-
-
 #set up launchpad
 
 lp = launchpad.LaunchpadMk2()
@@ -76,6 +72,50 @@ while 1:
 
     autobrake_pos = vr.get("(L:A32NX_AUTOBRAKES_ARMED_MODE)")
     print(autobrake_pos)
+
+    if autobrake_pos == 0:
+        lp.LedCtrlXY(3, 2, 0, 0, 0)
+        lp.LedCtrlXY(4, 2, 0, 0, 0)
+        lp.LedCtrlXY(5, 2, 0, 0, 0)
+    elif autobrake_pos == 1:
+        lp.LedCtrlXY(3, 2, 0, 0, 255)
+        lp.LedCtrlXY(4, 2, 0, 0, 0)
+        lp.LedCtrlXY(5, 2, 0, 0, 0)
+    elif autobrake_pos == 2:
+        lp.LedCtrlXY(3, 2, 0, 0, 0)
+        lp.LedCtrlXY(4, 2, 0, 0, 255)
+        lp.LedCtrlXY(5, 2, 0, 0, 0)
+    elif autobrake_pos == 3:
+        lp.LedCtrlXY(3, 2, 0, 0, 0)
+        lp.LedCtrlXY(4, 2, 0, 0, 0)
+        lp.LedCtrlXY(5, 2, 0, 0, 255)
+
+    if (buttons_pressed != []) :
+        print(buttons_pressed[0], buttons_pressed[1])
+        if (buttons_pressed[0] == 3 and buttons_pressed[1] == 2):
+            if (autobrake_pos == 0):
+                vr.set("1 (>L:A32NX_AUTOBRAKES_ARMED_MODE_SET)")
+                break
+            elif (autobrake_pos == 1):
+                vr.set("0 (>L:A32NX_AUTOBRAKES_ARMED_MODE_SET)")
+                break
+        elif (buttons_pressed[0] == 4 and buttons_pressed[1] == 2):
+            if (autobrake_pos == 0):
+                vr.set("2 (>L:A32NX_AUTOBRAKES_ARMED_MODE_SET)")
+                break
+            elif (autobrake_pos == 2):
+                vr.set("0 (>L:A32NX_AUTOBRAKES_ARMED_MODE_SET)",)
+                break
+        
+        elif (buttons_pressed[0] == 5 and buttons_pressed[1] == 2):
+            if (autobrake_pos == 0):
+                vr.set("3 (>L:A32NX_AUTOBRAKES_ARMED_MODE_SET)")
+                break
+            elif (autobrake_pos == 4):
+                vr.set("0 (>L:A32NX_AUTOBRAKES_ARMED_MODE_SET)")
+                break
+
+               
 
  
 
