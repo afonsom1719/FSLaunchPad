@@ -12,17 +12,15 @@ lp.Open(0, "Launchpad Mk2")
 lp.Reset()
 
 
-while 1:
-    buttons_pressed = lp.ButtonStateXY()
-
-    if (buttons_pressed != []) :
-        print(buttons_pressed[0], buttons_pressed[1], buttons_pressed[2])
-        break
+smm = SimConnectMobiFlight()
+vr = MobiFlightVariableRequests(smm)
+vr.clear_sim_variables()
 
 
 
-#lp.ledCtrlXY(4, 3, 0, 255, 0) #gear handle up position light
-#lp.Reset()
+autobrake_pos = vr.get("(L:A32NX_AUTOBRAKES_ARMED_MODE)")
+ap1 = vr.get("(L:A32NX_AUTOPILOT_1_ACTIVE)")
+print(ap1)
 
 
 

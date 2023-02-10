@@ -3,6 +3,8 @@ import logging
 from SimConnect.Enum import *
 from time import sleep
 import launchpad_py as launchpad
+from simconnect_mobiflight import SimConnectMobiFlight
+from mobiflight_variable_requests import MobiFlightVariableRequests
 
 #set up simconnect
 
@@ -12,10 +14,19 @@ LOGGER.info("START")
 # time holder for inline commands
 ct_g = millis()
 
-# creat simconnection and pass used user classes
+# create simconnection and pass used user classes
 sm = SimConnect()
 aq = AircraftRequests(sm)
 ae = AircraftEvents(sm)
+smm = SimConnectMobiFlight()
+vr = MobiFlightVariableRequests(smm)
+vr.clear_sim_variables()
+
+
+
+
+
+
 
 #set up launchpad
 
@@ -28,7 +39,7 @@ while 1:
 
     buttons_pressed = lp.ButtonStateXY()
 
-    #landing gear
+    #LANDING GEAR
 
     lg_handle = aq.get("GEAR_HANDLE_POSITION")
     lg_percent = aq.get("GEAR_TOTAL_PCT_EXTENDED")
@@ -60,6 +71,12 @@ while 1:
             #set gear handle position to 1
             trigger_event = ae.find("GEAR_UP")
             trigger_event() 
+
+    #AUTOBRAKE
+
+    autobrake_pos = vr.get("(L:A32NX_AUTOBRAKES_ARMED_MODE)")
+    print(autobrake_pos)
+
  
 
 
